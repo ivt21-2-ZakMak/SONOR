@@ -2,17 +2,18 @@ import Link from 'next/link'
 
 export default function Page() {
   return (
-    <>
-      <h1>Index Page</h1>
-      <hr />
-      <ul>
-        <li>
-          <Link href="/post/1">Post 1</Link>
-        </li>
-        <li>
-          <Link href="/post/2">Post 2</Link>
-        </li>
-      </ul>
-    </>
+    <div className='bg-gray-800 bg-opacity-80 border-4 border-yellow-500 rounded-2xl shadow-2xl p-10 w-[400px] text-center space-y-6'>
+      <h1 className='text-3xl font-bold text-yellow-400'>Главное меню</h1>
+      <button className='w-full py-3 text-xl font-semibold rounded-lg bg-yellow-500 hover:bg-yellow-600 text-black transition'>
+        <Link href='/post/1'>
+          Начать игру
+        </Link>
+      </button>
+      <button className='w-full py-3 text-xl font-semibold rounded-lg bg-yellow-500 hover:bg-yellow-600 text-black transition'>
+        <Link href='/post/2'>
+          Настройки
+        </Link>
+      </button>
+    </div>
   )
 }
