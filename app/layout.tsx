@@ -5,7 +5,7 @@ export default function RootLayout(
 ) {
   return (
     <html lang="ru">
-      <body className='bg-gradient-to-b from-gray-900 to-black min-h-screen flex items-center justify-center'>
+      <body className='container mx-auto'>
         {children}
       </body>
     </html>
