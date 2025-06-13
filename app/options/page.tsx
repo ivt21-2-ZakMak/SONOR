@@ -1,4 +1,6 @@
-import Link from 'next/link'
+'use client';
+
+import Link from 'next/link';
 
 export default function Page() {
   return (
@@ -6,5 +8,5 @@ export default function Page() {
       <h1>Настройки</h1>
       <Link href="/">Назад</Link>
     </>
-  )
+  );
 }

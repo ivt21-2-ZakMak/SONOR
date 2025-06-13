@@ -1,11 +1,11 @@
-"use client"
+'use client';
 
-import Link from "next/link"
+import Link from 'next/link';
 
-import Field from "../components/field"
+import Field from '../components/field';
 
 export default function Page() {
-  const color = "black"
+  const color = 'black';
   return (
     <>
       <h1>Игра</h1>
@@ -14,5 +14,5 @@ export default function Page() {
       </p>
       <Field props={{ color: color }} />
     </>
-  )
+  );
 }

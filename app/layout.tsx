@@ -1,13 +1,13 @@
-import './globals.css'
+import './globals.css';
 
-export default function RootLayout(
-  { children }: { children: React.ReactNode }
-) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="ru">
-      <body className='container mx-auto'>
-        {children}
-      </body>
+      <body className="container mx-auto">{children}</body>
     </html>
-  )
+  );
 }
