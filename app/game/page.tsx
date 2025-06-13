@@ -1,16 +1,18 @@
-// import Image from 'next/image'
-import Link from 'next/link'
-import Field from '../field'
+"use client"
+
+import Link from "next/link"
+
+import Field from "../components/field"
 
 export default function Page() {
+  const color = "black"
   return (
     <>
       <h1>Игра</h1>
       <p>
-        <Link href='/'>Назад</Link>
+        <Link href="/">Назад</Link>
       </p>
-      {/* <Image alt='Field' src='field.svg' fill={true} unoptimized /> */}
-      <Field props={{color: 'black'}} />
+      <Field props={{ color: color }} />
     </>
   )
 }
