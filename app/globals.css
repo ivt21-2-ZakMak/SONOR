@@ -1,1 +1,5 @@
 @import 'tailwindcss';
+
+.field {
+  max-height: calc(100vh - 48px);
+}

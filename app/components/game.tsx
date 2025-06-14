@@ -9,7 +9,7 @@ const Chaser = ({ x, y }: { x: number; y: number }) => (
 
 // Новая фишка для догоняющего
 const NewChaser = ({ x, y }: { x: number; y: number }) => (
-  <circle cx={x} cy={y} r="2" stroke="Black" strokeWidth=".05" fill="DodgerBlue" strokeDasharray={0.1} />
+  <circle cx={x} cy={y} r="2" stroke="Black" strokeWidth=".05" fill="LightBlue" strokeDasharray={0.1} />
 );
 
 // Убегающий
@@ -17,8 +17,15 @@ const Escaper = ({ x, y }: { x: number; y: number }) => (
   <circle cx={x} cy={y} r="1" stroke="Black" strokeWidth=".05" fill="Green" />
 );
 
+// Новая фишка для убегающего
+// const NewEscaper = ({ x, y }: { x: number; y: number }) => (
+//   <circle cx={x} cy={y} r="1" stroke="Black" strokeWidth=".05" fill="LightGreen" strokeDasharray={0.1} />
+// );
+
 export default function Game({ props = null }) {
   const svgRef = useRef<SVGSVGElement>(null);
+
+  // const [turn, setTurn] = useState('escaper');
 
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -56,7 +63,7 @@ export default function Game({ props = null }) {
   };
 
   return (
-    <svg onClick={handleClick} ref={svgRef} viewBox="0 0 42 30" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg onClick={handleClick} ref={svgRef} viewBox="0 0 42 30" className='m-auto field' xmlns="http://www.w3.org/2000/svg" {...props} >
       {/* Контур игрового поля */}
       <rect x="0" y="0" width="42" height="30" stroke="currentcolor" fill="none" strokeWidth="0.1" />
 
@@ -74,6 +81,7 @@ export default function Game({ props = null }) {
       <line x1="33" y1="0" x2="33" y2="30" stroke="currentcolor" strokeWidth="0.05" />
       <Chaser x={33} y={15} />
       <NewChaser x={position.x} y={position.y} />
+      {/* <NewEscaper x={position.x} y={position.y} /> */}
     </svg>
   );
 }
