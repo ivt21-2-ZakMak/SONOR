@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 
 const Chaser = ({ x, y }: { x: number; y: number }) => (
   <circle cx={x} cy={y} r="2" fill="blue" stroke="black" strokeWidth=".05" />
@@ -11,34 +11,17 @@ const Escaper = ({ x, y }: { x: number; y: number }) => (
 );
 
 export default function Field({ props = null }) {
-  // Размер компонента
-  const [size, setSize] = useState({ width: 0, height: 0 });
 
-  // Ссылка на контейнер
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // При рендеринге
   useEffect(() => {
-    // Создаем наблюдателя за изменением размера
-    const observer = new ResizeObserver(([entry]) => {
-      // Читаем текущий размер компонента
-      const { width, height } = entry.contentRect;
-
-      // Изменяем размеры компонента
-      setSize({ width, height });
-    });
-
-    // Подписываемся на изменения размера контейнера
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    // Отписка от событий при завершении рендеринга
-    return () => observer.disconnect();
+    const handleMouseMove = (e: MouseEvent) => {
+      setPosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" ref={containerRef} viewBox="0 0 42 30" width="100%" {...props}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 30" {...props}>
       {/* Контур игрового поля */}
       <rect x="0" y="0" width="42" height="30" stroke="currentcolor" fill="none" strokeWidth="0.1" />
 

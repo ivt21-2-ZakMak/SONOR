@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import Field from '../components/field';
+import Field from '../components/game';
 
 export default function Page() {
   const color = 'black';
