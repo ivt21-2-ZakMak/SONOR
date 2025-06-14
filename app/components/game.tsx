@@ -43,6 +43,7 @@ export default function Game({ props = null }) {
   }, []);
 
   const handleClick = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+    console.log(e);
     // if (!svgRef.current) return;
 
     // const svg = svgRef.current;
