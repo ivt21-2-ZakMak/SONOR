@@ -19,9 +19,5 @@
     "postcss": "^8.5.4",
     "tailwindcss": "^4.1.8",
     "typescript": "5.8.3"
-  },
-  "prettier": {
-    "singleAttributePerLine": false,
-    "singleQuote": true
   }
 }
