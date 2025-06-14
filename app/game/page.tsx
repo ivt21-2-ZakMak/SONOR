@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import Field from '../components/game';
+import Game from '../components/game';
 
 export default function Page() {
   const color = 'black';
@@ -12,7 +12,7 @@ export default function Page() {
       <p>
         <Link href="/">Назад</Link>
       </p>
-      <Field props={{ color: color }} />
+      <Game props={{ color: color }} />
     </>
   );
 }
