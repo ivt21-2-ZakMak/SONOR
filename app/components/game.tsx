@@ -2,6 +2,9 @@
 
 import { JSX, useEffect, useRef, useState } from 'react';
 
+const FIELD_HEIGHT = 30;
+const FIELD_WIDTH = 42;
+
 // Догоняющий
 const Chaser = ({ x, y }: { x: number; y: number }) => (
   <circle cx={x} cy={y} r="2" stroke="Black" strokeWidth=".05" fill="Blue" />
@@ -23,14 +26,22 @@ const NewEscaper = ({ x, y }: { x: number; y: number }) => (
 );
 
 export default function Game({ props = null }) {
+  const viewbox = '0 0 ' + FIELD_WIDTH + ' ' + FIELD_HEIGHT;
+
   const svgRef = useRef<SVGSVGElement>(null);
 
   const [turn, setTurn] = useState('escaper');
+  const handleClick = () => {
+    if (turn === 'escaper') {
+      setTurn('chaser');
+    } else {
+      setTurn('escaper');
+    }
+  };
 
   const [position, setPosition] = useState({ x: 0, y: 0 });
-
   useEffect(() => {
-    // Подключаем обработчик
+    // Создаем обработчик для движения мышки
     const handleMouseMove = (e: MouseEvent) => {
       const svgElement = svgRef.current;
       const rect = svgElement.getBoundingClientRect();
@@ -40,9 +51,29 @@ export default function Game({ props = null }) {
         e.clientY > rect.y &&
         e.clientY < rect.height + rect.y
       ) {
-        const x = ((e.clientX - rect.x) / rect.width) * 42;
-        const y = ((e.clientY - rect.y) / rect.height) * 30;
-        setPosition({ x: x, y: y });
+        const mouse = {
+          x: ((e.clientX - rect.x) / rect.width) * FIELD_WIDTH,
+          y: ((e.clientY - rect.y) / rect.height) * FIELD_HEIGHT,
+        };
+        console.log('Mouse x: ' + mouse.x + ', y: ' + mouse.y)
+        let point2: { x: number; y: number };
+        if (turn === 'escaper') {
+          point2 = { x: mouse.x, y: mouse.y };
+        } else {
+          // Догоняющий
+          const point1 = { x: 33, y: 15 };
+          const vector1 = { x: mouse.x - point1.x, y: mouse.y - point1.y };
+          console.log('Vector1 x: ' + vector1.x + ', y: ' + vector1.y)
+          const length1 = Math.sqrt(vector1.x * vector1.x + vector1.y * vector1.y);
+          console.log('Length1: ' + length1)
+          const vector2 = { x: (vector1.x / length1) * 4, y: (vector1.y / length1) * 4 };
+          const length2 = Math.sqrt(vector2.x * vector2.x + vector2.y * vector2.y);
+          console.log('Length2: ' + length2)
+          console.log('Vector2 x: ' + vector2.x + ', y: ' + vector2.y)
+          point2 = { x: point1.x + vector2.x, y: point1.y + vector2.y };
+          console.log('Point2 x:' + point2.x + ', y: ' + point2.y)
+        }
+        setPosition(point2);
       }
     };
 
@@ -51,15 +82,7 @@ export default function Game({ props = null }) {
 
     // Когда закончится отрисовка нужно отключить обработчик
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  const handleClick = () => {
-    if (turn == 'escaper') {
-      setTurn('chaser');
-    } else {
-      setTurn('escaper');
-    }
-  };
+  }, [turn]);
 
   let newChip: JSX.Element;
   if (turn === 'escaper') {
@@ -72,26 +95,27 @@ export default function Game({ props = null }) {
     <svg
       onClick={handleClick}
       ref={svgRef}
-      viewBox="0 0 42 30"
+      viewBox={viewbox}
       className="m-auto field"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       {/* Контур игрового поля */}
-      <rect x="0" y="0" width="42" height="30" stroke="currentcolor" fill="none" strokeWidth="0.1" />
+      <rect x="0" y="0" width={FIELD_WIDTH} height={FIELD_HEIGHT} stroke="currentcolor" fill="none" strokeWidth="0.1" />
+
+      {/* Линии игрового поля */}
+      <line x1="4" y1="0" x2="4" y2={FIELD_HEIGHT} stroke="currentcolor" strokeWidth="0.05" />
+      <line x1="24" y1="0" x2="24" y2={FIELD_HEIGHT} stroke="currentcolor" strokeWidth="0.05" />
+      <line x1="33" y1="0" x2="33" y2={FIELD_HEIGHT} stroke="currentcolor" strokeWidth="0.05" />
 
       {/* Убегающие */}
-      <line x1="4" y1="0" x2="4" y2="30" stroke="currentcolor" strokeWidth="0.05" />
       <Escaper x={4} y={5} />
       <Escaper x={4} y={10} />
       <Escaper x={4} y={15} />
       <Escaper x={4} y={20} />
       <Escaper x={4} y={25} />
 
-      <line x1="24" y1="0" x2="24" y2="30" stroke="currentcolor" strokeWidth="0.05" />
-
       {/* Догоняющий */}
-      <line x1="33" y1="0" x2="33" y2="30" stroke="currentcolor" strokeWidth="0.05" />
       <Chaser x={33} y={15} />
 
       {/* Новая фишка */}
