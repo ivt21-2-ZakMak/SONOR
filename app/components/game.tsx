@@ -55,7 +55,6 @@ export default function Game({ props = null }) {
           x: ((e.clientX - rect.x) / rect.width) * FIELD_WIDTH,
           y: ((e.clientY - rect.y) / rect.height) * FIELD_HEIGHT,
         };
-        console.log('Mouse x: ' + mouse.x + ', y: ' + mouse.y)
         let point2: { x: number; y: number };
         if (turn === 'escaper') {
           point2 = { x: mouse.x, y: mouse.y };
@@ -63,15 +62,9 @@ export default function Game({ props = null }) {
           // Догоняющий
           const point1 = { x: 33, y: 15 };
           const vector1 = { x: mouse.x - point1.x, y: mouse.y - point1.y };
-          console.log('Vector1 x: ' + vector1.x + ', y: ' + vector1.y)
           const length1 = Math.sqrt(vector1.x * vector1.x + vector1.y * vector1.y);
-          console.log('Length1: ' + length1)
           const vector2 = { x: (vector1.x / length1) * 4, y: (vector1.y / length1) * 4 };
-          const length2 = Math.sqrt(vector2.x * vector2.x + vector2.y * vector2.y);
-          console.log('Length2: ' + length2)
-          console.log('Vector2 x: ' + vector2.x + ', y: ' + vector2.y)
           point2 = { x: point1.x + vector2.x, y: point1.y + vector2.y };
-          console.log('Point2 x:' + point2.x + ', y: ' + point2.y)
         }
         setPosition(point2);
       }
