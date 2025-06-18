@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>ЖИПТО - Сонор</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Главное меню -->
+<div id="main-menu" class="screen active menu-container">
+    <h1 data-lang="welcome">Добро пожаловать в Сонор!</h1>
+    <div class="menu-buttons">
+        <button data-lang="play" onclick="showScreen('game-screen')">Играть</button>
+        <button data-lang="tutorial" onclick="showScreen('tutorial-screen')">Обучение</button>
+        <button data-lang="settings" onclick="showScreen('settings-screen')">Настройки</button>
+    </div>
+</div>
+
+<!-- Экран игры -->
+<div id="game-screen" class="screen">
+    <h2 data-lang="game-title">Игра Сонор</h2>
+    <p id="turn-indicator">Ход убегающего</p>
+
+    <!-- Игровое поле -->
+    <div id="sonor-board"></div>
+
+    <!-- Подсказки по управлению -->
+    <p>Убегающий: Q W E / A D / Z X C</p>
+    <p>Преследователь: T Y U / G J / B N M</p>
+    <p>Пробел или Enter — выбрать следующую фишку</p>
+
+    <!-- Кнопка выхода -->
+    <button onclick="showScreen('main-menu')" data-lang="back">В главное меню</button>
+</div>
+
+<!-- Экран обучения -->
+<div id="tutorial-screen" class="screen">
+    <h2 data-lang="tutorial-title">Обучение</h2>
+    <p data-lang="tutorial-text">Правила игры Сонор: игроки делятся на убегающих и преследователей. Убегающие должны достичь безопасной зоны, преследователь должен поймать их.</p>
+    <button onclick="showScreen('main-menu')" data-lang="back">Назад</button>
+</div>
+
+<!-- Экран настроек -->
+<div id="settings-screen" class="screen">
+    <h2 data-lang="settings-title">Настройки</h2>
+
+    <div class="setting-item">
+        <label data-lang="volume" for="volume">Громкость:</label>
+        <input type="range" id="volume" min="0" max="100" value="50">
+    </div>
+
+    <div class="setting-item">
+        <label data-lang="music" for="music">Музыка:</label>
+        <input type="range" id="music" min="0" max="100" value="50">
+    </div>
+
+    <div class="setting-item">
+        <label data-lang="language" for="language">Выберите язык:</label>
+        <select id="language">
+            <option value="ru">Русский</option>
+            <option value="sah">Якутский</option>
+        </select>
+    </div>
+
+    <button onclick="showScreen('main-menu')" data-lang="back">Назад</button>
+</div>
+
+<script src="script.js"></script>
+<script src="game.js"></script>
+</body>
+</html>

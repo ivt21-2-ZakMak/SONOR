@@ -1,0 +1,175 @@
+/* Обнуление отступов */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Основной фон и шрифт */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0f172a;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Контейнер для всех экранов */
+.screen-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Стили для всех экранов */
+.screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+}
+
+.screen.active {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+/* Заголовок */
+h1, h2 {
+    margin-bottom: 40px;
+    font-size: 2.5em;
+    color: #f1c40f;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Блок с кнопками */
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 250px;
+}
+
+/* Стили кнопок */
+button {
+    padding: 15px 20px;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+/* Цвета кнопок */
+button[onclick="showScreen('game-screen')"] {
+    background-color: #2ecc71; /* Зелёный */
+}
+
+button[onclick="showScreen('tutorial-screen')"] {
+    background-color: #3498db; /* Голубой */
+}
+
+button[onclick="showScreen('settings-screen')"] {
+    background-color: #f39c12; /* Оранжевый */
+}
+
+button[onclick="showScreen('main-menu')"] {
+    background-color: #e74c3c; /* Красный */
+}
+
+/* Эффект при наведении */
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Эффект при нажатии */
+button:active {
+    transform: scale(0.98);
+}
+
+/* Стили для настроек */
+.setting-item {
+    margin: 20px 0;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+}
+
+.setting-item label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.setting-item input[type="range"],
+.setting-item select {
+    width: 100%;
+    max-width: 200px;
+    accent-color: #f1c40f;
+}
+
+/* Выравнивание текста */
+p {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#game-container {
+    text-align: center;
+}
+
+#sonor-board {
+    display: flex;
+    width: 800px;
+    height: 400px;
+    margin: 40px auto;
+    position: relative;
+    background-color: #1e2743;
+    border: 5px solid #f1c40f;
+}
+
+/* Фишки */
+.pawn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.2s ease;
+}
+
+.runner {
+    background-color: #2ecc71;
+    border: 2px solid #27ae60;
+}
+
+.chaser {
+    background-color: #000;
+    border: 2px solid #333;
+    width: 60px;
+    height: 60px;
+}
+
+.pawn.active {
+    outline: 3px solid #f1c40f;
+    transform: scale(1.1);
+}

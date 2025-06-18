@@ -1,4 +1,5 @@
 .next/
 node_modules/
+old/
 out/
 paperwork/
